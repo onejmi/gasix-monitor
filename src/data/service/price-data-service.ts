@@ -1,5 +1,5 @@
 import PriceRecord from "../models/PriceRecord";
-import { PriceDatabase } from "./db-service";
+import {PriceDatabase} from "./db-service";
 import axios from "axios"
 
 /**
@@ -14,7 +14,7 @@ export class PriceMonitor {
      * @returns The {@link PriceMonitor} application instance
      */
     static getInstance() {
-        if(PriceMonitor._instance == null) {
+        if (PriceMonitor._instance == null) {
             PriceMonitor._instance = new PriceMonitor();
         }
         return PriceMonitor._instance;
@@ -31,7 +31,7 @@ export class PriceMonitor {
      * @param priceEndpoint - The Etherscan endpoint to query for prices
      * @param refreshRate - The interval (in milliseconds) to query {@link priceEndpoint}
      */
-    start(apiKey: string, priceEndpoint: string, refreshRate: number) : void {
+    start(apiKey: string, priceEndpoint: string, refreshRate: number): void {
         setInterval(async () => {
             try {
                 const res = await axios.get(priceEndpoint + apiKey);
@@ -56,11 +56,11 @@ export class PriceMonitor {
      * @param refreshRate - The interval (in milliseconds) to query {@link priceEndpoint}
      * @returns The average price (rounded to 2 decimal points) or -1 if there are no added prices
      */
-    async retrieveAveragePrice(start: number, end: number) : Promise<number> {
+    async retrieveAveragePrice(start: number, end: number): Promise<number> {
         let total = 0;
         let recordCount = 0;
         try {
-            await PriceDatabase.getInstance().collections.prices.find({timestamp: { $gte: start, $lte: end}})
+            await PriceDatabase.getInstance().collections.prices.find({timestamp: {$gte: start, $lte: end}})
                 .forEach((record) => {
                     total += +record.average;
                     recordCount++;
@@ -80,7 +80,7 @@ export class PriceMonitor {
      *
      * @returns The latest Ethereum gas price or null if none is found
      */
-    async retrieveCurrentPrice() : Promise<PriceRecord | null> {
+    async retrieveCurrentPrice(): Promise<PriceRecord | null> {
         try {
             // using find instead of findOne since find returns a cursor which supports the .sort() function
             const latest =

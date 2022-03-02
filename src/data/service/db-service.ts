@@ -19,7 +19,7 @@ export class PriceDatabase {
      */
     static getInstance() {
         // lazy init
-        if(PriceDatabase._instance == null) {
+        if (PriceDatabase._instance == null) {
             PriceDatabase._instance = new PriceDatabase();
         }
         return PriceDatabase._instance;
@@ -42,13 +42,13 @@ export class PriceDatabase {
         this._collections.prices = db.collection<PriceRecord>(pricesCollectionName);
 
         // for faster indexing - (index by time added)
-        await this._collections.prices.createIndex({ timestamp: 1 })
+        await this._collections.prices.createIndex({timestamp: 1})
     }
 
     /**
      * @returns The database prices collection
      */
-    get collections() : { prices?: mongo.Collection<PriceRecord> } {
+    get collections(): { prices?: mongo.Collection<PriceRecord> } {
         return this._collections;
     }
 }
