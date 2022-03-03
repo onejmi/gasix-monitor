@@ -6,7 +6,7 @@ operation gas prices on the Ethereum Network.
 ### Endpoints
 
 - ``/gas`` produces the latest gas prices
-- ``/average?fromTime=FROM_TIME&toTime=TO_TIME`` produces the average price of gas over a period of time, starting from [fromTime] to [toTime] (where both fields are in secons since epoch)
+- ``/average?fromTime=FROM_TIME&toTime=TO_TIME`` produces the average price of gas over a period of time, starting from [fromTime] to [toTime] (where both fields are in seconds since epoch)
 
 **Note:** All prices are in *Gwei*
 
